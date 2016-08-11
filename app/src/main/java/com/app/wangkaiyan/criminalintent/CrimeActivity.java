@@ -17,7 +17,7 @@ public class CrimeActivity extends FragmentActivity {
         Fragment fragment = fm.findFragmentById(R.id.fragment_container);
 
         if(fragment == null){
-            fragment = new Fragment();
+            fragment = new CrimeFragment();
             fm.beginTransaction().add(R.id.fragment_container, fragment).commit();
         }
     }

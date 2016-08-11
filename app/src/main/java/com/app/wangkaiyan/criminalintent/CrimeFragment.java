@@ -1,14 +1,17 @@
 package com.app.wangkaiyan.criminalintent;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
 
 /**
  * Created by wangkaiyan on 2016/8/11.
@@ -16,7 +19,9 @@ import android.widget.TextView;
 public class CrimeFragment extends Fragment {
 
     private Crime mCrime;
-    private TextView mTitleField;
+    private EditText mTitleField;
+    private Button mDateButton;
+    private CheckBox mSolvedCheckBox;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,7 +33,8 @@ public class CrimeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_crime, container, false); //生成fragment的视图
 
-        mTitleField = (TextView) v.findViewById(R.id.crime_title);
+        //标题输入框
+        mTitleField = (EditText) v.findViewById(R.id.crime_title);
         mTitleField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -43,6 +49,21 @@ public class CrimeFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable editable) {
 
+            }
+        });
+
+        //日期按钮
+        mDateButton = (Button) v.findViewById(R.id.crime_date);
+        String date = (String) DateFormat.format("EEEE, MMMM dd, yyyy    kk:mm", mCrime.getDate());
+        mDateButton.setText(date);
+        mDateButton.setEnabled(false);
+
+        //单选框
+        mSolvedCheckBox = (CheckBox) v.findViewById(R.id.crime_solved);
+        mSolvedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                mCrime.setSolved(b);
             }
         });
 
