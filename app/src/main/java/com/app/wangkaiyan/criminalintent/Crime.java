@@ -10,7 +10,7 @@ public class Crime {
     private UUID mId;
     private String mTitle;
 
-    public Crime(UUID id) {
+    public Crime() {
         mId = UUID.randomUUID();
     }
 
