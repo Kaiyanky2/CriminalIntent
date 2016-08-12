@@ -1,4 +1,4 @@
-package com.app.wangkaiyan.criminalintent;
+package com.app.wangkaiyan.criminalintent.Controller;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
+
+import com.app.wangkaiyan.criminalintent.Model.Crime;
+import com.app.wangkaiyan.criminalintent.Model.CrimeLab;
+import com.app.wangkaiyan.criminalintent.R;
 
 import java.util.List;
 

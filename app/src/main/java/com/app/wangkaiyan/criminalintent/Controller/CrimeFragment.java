@@ -1,4 +1,4 @@
-package com.app.wangkaiyan.criminalintent;
+package com.app.wangkaiyan.criminalintent.Controller;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +12,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+
+import com.app.wangkaiyan.criminalintent.Model.Crime;
+import com.app.wangkaiyan.criminalintent.R;
 
 /**
  * Created by wangkaiyan on 2016/8/11.

@@ -8,11 +8,11 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CrimeActivity">
+        <activity android:name=".Controller.CrimeActivity">
 
         </activity>
 
-        <activity android:name=".CrimeListActivity">
+        <activity android:name=".Controller.CrimeListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

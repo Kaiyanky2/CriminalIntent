@@ -1,9 +1,11 @@
-package com.app.wangkaiyan.criminalintent;
+package com.app.wangkaiyan.criminalintent.Controller;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+
+import com.app.wangkaiyan.criminalintent.R;
 
 /**
  * Created by wangkaiyan on 2016/8/11.

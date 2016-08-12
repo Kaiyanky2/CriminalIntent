@@ -1,4 +1,4 @@
-package com.app.wangkaiyan.criminalintent;
+package com.app.wangkaiyan.criminalintent.Model;
 
 import java.util.Date;
 import java.util.UUID;
