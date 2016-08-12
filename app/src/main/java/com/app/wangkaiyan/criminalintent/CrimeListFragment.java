@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.List;
@@ -22,12 +24,26 @@ public class CrimeListFragment extends Fragment {
     //ViewHolder内部类
     private class CrimeHolder extends RecyclerView.ViewHolder{
 
-        public TextView mTitleTextView;
+        private TextView mTitleTextView;
+        private TextView mDateTextView;
+        private CheckBox mSolvedCheckBox;
+
+        private Crime mCrime;
 
         public CrimeHolder(View itemView) {
             super(itemView);
 
-            mTitleTextView = (TextView) itemView;
+            mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_crime_title_text_view);
+            mDateTextView = (TextView) itemView.findViewById(R.id.list_item_crime_date_text_view);
+            mSolvedCheckBox = (CheckBox) itemView.findViewById(R.id.list_item_crime_solved_check_box);
+        }
+
+        public void bindCrime(Crime crime){
+            mCrime = crime;
+            mTitleTextView.setText(mCrime.getTitle());
+            String date = (String) DateFormat.format("EEEE, MMMM dd, yyyy    kk:mm", mCrime.getDate());
+            mDateTextView.setText(date);
+            mSolvedCheckBox.setChecked(mCrime.isSolved());
         }
     }
 
@@ -44,7 +60,7 @@ public class CrimeListFragment extends Fragment {
         public CrimeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             //需要新的View来显示列表项时调用
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-            View v = layoutInflater.inflate(android.R.layout.simple_list_item_1, parent, false);
+            View v = layoutInflater.inflate(R.layout.list_item_crime, parent, false);
 
             return new CrimeHolder(v);
         }
@@ -53,7 +69,9 @@ public class CrimeListFragment extends Fragment {
         public void onBindViewHolder(CrimeHolder holder, int position) {
             //将ViewHolder的View视图和模型层数据绑定起来
             Crime crime = mCrimes.get(position);
-            holder.mTitleTextView.setText(crime.getTitle());
+            System.out.println(crime.toString());
+
+            holder.bindCrime(crime);
         }
 
         @Override
@@ -71,9 +89,11 @@ public class CrimeListFragment extends Fragment {
         mCrimeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         updateUI();
+
         return v;
     }
 
+    //更新列表
     private void updateUI(){
         CrimeLab crimeLab = CrimeLab.get(getActivity());
         List<Crime> crimes = crimeLab.getCrimes();
