@@ -1,5 +1,6 @@
 package com.app.wangkaiyan.criminalintent.Controller;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,8 +27,9 @@ public class CrimeListFragment extends Fragment {
     private CrimeAdapter mAdapter;
 
     //ViewHolder内部类
-    private class CrimeHolder extends RecyclerView.ViewHolder{
+    private class CrimeHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
+//        private TextView mTitleTextView;
         private TextView mTitleTextView;
         private TextView mDateTextView;
         private CheckBox mSolvedCheckBox;
@@ -36,7 +38,9 @@ public class CrimeListFragment extends Fragment {
 
         public CrimeHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
 
+//            mTitleTextView = (TextView) itemView;
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_crime_title_text_view);
             mDateTextView = (TextView) itemView.findViewById(R.id.list_item_crime_date_text_view);
             mSolvedCheckBox = (CheckBox) itemView.findViewById(R.id.list_item_crime_solved_check_box);
@@ -48,6 +52,12 @@ public class CrimeListFragment extends Fragment {
             String date = (String) DateFormat.format("EEEE, MMMM dd, yyyy    kk:mm", mCrime.getDate());
             mDateTextView.setText(date);
             mSolvedCheckBox.setChecked(mCrime.isSolved());
+        }
+
+        @Override
+        public void onClick(View mView) {
+            Intent intent = new Intent(getActivity(), CrimeActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -65,6 +75,7 @@ public class CrimeListFragment extends Fragment {
             //需要新的View来显示列表项时调用
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
             View v = layoutInflater.inflate(R.layout.list_item_crime, parent, false);
+//            View v = layoutInflater.inflate(android.R.layout.simple_list_item_1, parent, false);
 
             return new CrimeHolder(v);
         }
@@ -74,7 +85,7 @@ public class CrimeListFragment extends Fragment {
             //将ViewHolder的View视图和模型层数据绑定起来
             Crime crime = mCrimes.get(position);
             System.out.println(crime.toString());
-
+//            holder.mTitleTextView.setText(crime.getTitle());
             holder.bindCrime(crime);
         }
 
